@@ -1,11 +1,14 @@
 import prisma from '../db'
 import { comparePasswords, createJWT, hashPassword } from '../modules/auth'
-
 export const createNewUser = async (req, res) => {
   const user = await prisma.user.create({
     data: {
-      username: req.body.username,
-      password: await hashPassword(req.body.password)
+      email: req.body.email,
+      password: await hashPassword(req.body.password),
+      firstName:req.body.firstName,
+      lastName:req.body.lastName,
+      address:req.body.address,
+      phoneNumber:req.body.phoneNumber
     }
   })
 
@@ -16,7 +19,7 @@ export const createNewUser = async (req, res) => {
 export const signin = async (req, res) => {
   const user = await prisma.user.findUnique({
     where: {
-      username: req.body.username
+      email: req.body.email
     }
   })
 

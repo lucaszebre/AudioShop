@@ -39,7 +39,7 @@ export const createOrder = async (req, res) => {
       totalPrice:req.body.price,
       orderStatus:req.body.orderStatus,
       paymentMethod:req.body.method,
-      user: {connect: {id: order.id}}
+      user: {connect: {id: req.user.id}}
     }
   })
 

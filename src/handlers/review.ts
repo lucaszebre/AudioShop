@@ -20,11 +20,11 @@ import prisma  from "../db"
 
     res.json({data: reviews})
     }
-export const createreview = async (req, res) => {
+export const createReview = async (req, res) => {
 try {
       // Assuming user and product IDs are provided in the request body
-    const { userId, productId, rating, text } = req.body;
-    
+    const {  productId, rating, text } = req.body;
+    const {userId} = req.user.id
       // Validate the provided data as necessary
        // ...
     

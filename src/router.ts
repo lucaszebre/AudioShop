@@ -1,8 +1,8 @@
 import {Router} from 'express'
 import { body, oneOf, validationResult } from "express-validator"
 import { createProduct, deleteProduct, getOneProduct, getProducts, updateProduct } from './handlers/product'
-import { createOrder, deleteOrder, getOneOrder, getOrders } from './handlers/order'
-import { createreview, deleteReview, getOneReview, getReviews } from './handlers/review'
+import { createOrder, deleteOrder, getOneOrder, getOrders, updateOrder } from './handlers/order'
+import { createReview, deleteReview, getOneReview, getReviews } from './handlers/review'
 import { createOrderItem , deleteOrderItem, getOneOrderItem,getOrderItems } from './handlers/orderItem'
 import { handleInputErrors } from './modules/middleware'
 
@@ -27,14 +27,12 @@ router.put('/order/:id',
   body('userId').isString(),
   body('totalPrice').optional(),
   body('orderStatus').optional(),
-  body('paymentMethod').optional(),
-  
-)
+  body('paymentMethod').optional(), handleInputErrors,updateOrder)
 router.post('/order',
   body('userId').exists().isString(),
   body('totalPrice').exists().isFloat(),
   body('orderStatus').exists().isString(),
-  body('paymentMethod').exists().isString(),
+  body('paymentMethod').exists().isString(), handleInputErrors,
   createOrder
 )
 router.delete('/order/:id', deleteOrder)
@@ -47,7 +45,7 @@ router.post('/orderitem',
   body('orderId').isString(),
   body('productId').isString(),
   body('quantity').isInt(),
-  body('price').isFloat(),
+  body('price').isFloat(), handleInputErrors,
   createOrderItem
 );
 router.delete('/orderitem/:id', deleteOrderItem);
@@ -61,8 +59,8 @@ router.post('/review',
   body('productId').isString(),
   body('userId').isString(),
   body('rating').isInt(),
-  body('text').isString(),
-  createreview
+  body('text').isString(),handleInputErrors,
+  createReview
 );
 router.delete('/review/:id', deleteReview);
 

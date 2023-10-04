@@ -22,7 +22,7 @@ export const getOrderItems = async (req, res) => {
 }
 export const createOrderItem = async (req, res) => {
   
-    const { userId, productId, rating, text,connectId } = req.body;
+    const { productId,connectId } = req.body;
 
   const orderItem = await prisma.orderItem.findUnique({
     where: {

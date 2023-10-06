@@ -72,9 +72,8 @@ router.delete('/review/:id', deleteReview);
 /**
  * Cart
  */
-router.get('/cart/:userId', getUserCart);
+router.get('/cart', getUserCart);
 router.post('/cart',
-  body('userId').isString(),
   body('productId').isString(),
   body('quantity').isInt(), handleInputErrors,
   addItemToCart
@@ -84,7 +83,7 @@ router.put('/cart/:cartId',
   updateCartItem
 );
 router.delete('/cart/:cartId', removeItemFromCart);
-router.delete('/cart/clear/:userId', clearUserCart);
+router.delete('/cart/clear', clearUserCart);
 
 
 export default router;

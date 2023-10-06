@@ -1,7 +1,8 @@
 import prisma from "../db";
 
 export const addItemToCart = async (req, res) => {
-    const { userId, productId, quantity } = req.body;
+    const {  productId, quantity } = req.body;
+    const {userId}= req.user.id
   
     try {
       const newItem = await prisma.cart.create({
@@ -17,10 +18,10 @@ export const addItemToCart = async (req, res) => {
       res.status(500).send(error.message);
     }
   };
-  
+
 
 export const getUserCart = async (req, res) => {
-    const { userId } = req.params;
+    const { userId } = req.user.id;
   
     try {
       const cartItems = await prisma.cart.findMany({
@@ -65,7 +66,7 @@ export const getUserCart = async (req, res) => {
   };
   
   export const clearUserCart = async (req, res) => {
-    const { userId } = req.params;
+    const { userId } = req.user.id;
   
     try {
       await prisma.cart.deleteMany({

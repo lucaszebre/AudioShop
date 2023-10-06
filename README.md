@@ -55,21 +55,21 @@ The E-Commerce API is developed using **Express.js** and **Node.js** and **Postg
 
 ## Orders ##
 
-## Get All Orders
+- **Get All Orders**
 
     - Method: GET
     - Endpoint: /order
     - Access: Public/Private
     - Description: Retrieves all orders.
 
-## Get One Order ##
+- **Get One Order**
 
     - Method: GET
     - Endpoint: /order/:id
     - Access: Public/Private
     - Description: Retrieves details of a specific order by its id.
 
-## Create an Order ##
+- **Create an Order**
 
     - Method: POST
     - Endpoint: /order
@@ -80,7 +80,7 @@ The E-Commerce API is developed using **Express.js** and **Node.js** and **Postg
     - orderStatus: string (Required)
     - method: string (Required)
 
-## Update an Order ##
+- **Update an Order**
 
     - Method: PUT
     - Endpoint: /order/:id
@@ -91,7 +91,7 @@ The E-Commerce API is developed using **Express.js** and **Node.js** and **Postg
     - orderStatus: string (Optional)
     - method: string (Optional)
 
-## Delete an Order ##
+- **Delete an Order**
 
     - Method: DELETE
     - Endpoint: /order/:id
@@ -99,21 +99,23 @@ The E-Commerce API is developed using **Express.js** and **Node.js** and **Postg
     - Description: Deletes a specific order.
     Reviews
 
-## Get All Reviews ##
+## Review
+
+- **Get All Reviews**
 
     - Method: GET
     - Endpoint: /review
     - Access: Public
     - Description: Retrieves all reviews.
 
-## Get One Review ##
+- **Get One Review**
 
     - Method: GET
     - Endpoint: /review/:id
     - Access: Public
     - Description: Retrieves a specific review by its id.
 
-## Create a Review ##
+- **Create a Review**
 
     - Method: POST
     - Endpoint: /review
@@ -124,7 +126,7 @@ The E-Commerce API is developed using **Express.js** and **Node.js** and **Postg
     - rating: integer (Required)
     - text: string (Required)
 
-## Delete a Review ##
+- **Delete a Review**
 
     - Method: DELETE
     - Endpoint: /review/:id
@@ -132,21 +134,23 @@ The E-Commerce API is developed using **Express.js** and **Node.js** and **Postg
     - Description: Deletes a specific review.
     Order Items
 
-## Get All Order Items ##
+## Items
+
+- **Get All Order Items**
 
     - Method: GET
     - Endpoint: /orderitem
     - Access: Public/Private
     - Description: Retrieves all order items.
 
-## Get One Order Item ##
+- **Get One Order Item**
 
     - Method: GET
     - Endpoint: /orderitem/:id
     - Access: Public/Private
     - Description: Retrieves a specific order item by its id.
 
-## Create an Order Item ##
+- **Create an Order Item**
 
     - Method: POST
     - Endpoint: /orderitem
@@ -158,7 +162,7 @@ The E-Commerce API is developed using **Express.js** and **Node.js** and **Postg
     - quantity: integer (Required)
     - price: float (Required)
 
-## Delete an Order Item ##
+- **Delete an Order Item**
 
     - Method: DELETE
     - Endpoint: /orderitem/:id
@@ -168,14 +172,14 @@ The E-Commerce API is developed using **Express.js** and **Node.js** and **Postg
 
 ## Cart ##
 
-## Get User Cart ##
+- **Get User Cart**
 
     - Method: GET
     - Endpoint: /cart
     - Access: Private
     - Description: Retrieves the user's cart items.
 
-## Add Item to Cart ##
+- **Add Item to Cart**
 
     - Method: POST
     - Endpoint: /cart
@@ -185,7 +189,7 @@ The E-Commerce API is developed using **Express.js** and **Node.js** and **Postg
     - productId: string (Required)
     - quantity: integer (Required)
 
-## Update Cart Item ##
+- **Update Cart Item**
 
     - Method: PUT
     - Endpoint: /cart/:cartId
@@ -196,7 +200,7 @@ The E-Commerce API is developed using **Express.js** and **Node.js** and **Postg
     - Body Parameters:
     - quantity: integer (Optional)
 
-## Remove Item from Cart ##
+- **Remove Item from Cart**
 
     - Method: DELETE
     - Endpoint: /cart/:cartId
@@ -205,7 +209,7 @@ The E-Commerce API is developed using **Express.js** and **Node.js** and **Postg
     - Path Parameters:
     - cartId: string (Cart Item ID)
 
-## Clear User Cart ##
+- **Clear User Cart**
 
     - Method: DELETE
     - Endpoint: /cart/clear

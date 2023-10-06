@@ -12,12 +12,14 @@ The E-Commerce API is developed using **Express.js** and **Node.js** and **Postg
 ## Products ##
 
 - **Get All Products**
+
     - Method: GET
     - Endpoint: /product
     - Access: Public
     - Description: Retrieves all products.
 
 - **Create a Product**
+
     - Method: POST
     - Endpoint: /product
     -  Access: Admin Only
@@ -29,6 +31,7 @@ The E-Commerce API is developed using **Express.js** and **Node.js** and **Postg
     - stock: integer (Required)
 
 - **Update a Product**
+
     - Method: PUT
     - Endpoint: /product/:id
     - Access: Admin Only
@@ -42,6 +45,7 @@ The E-Commerce API is developed using **Express.js** and **Node.js** and **Postg
     - stock: integer (Optional)
 
 - **Delete a Product**
+
     - Method: DELETE
     - Endpoint: /product/:id
     - Access: Admin Only
@@ -110,6 +114,7 @@ The E-Commerce API is developed using **Express.js** and **Node.js** and **Postg
     - Description: Retrieves a specific review by its id.
 
 ## Create a Review ##
+
     - Method: POST
     - Endpoint: /review
     - Access: Private
@@ -143,69 +148,69 @@ The E-Commerce API is developed using **Express.js** and **Node.js** and **Postg
 
 ## Create an Order Item ##
 
-- Method: POST
-- Endpoint: /orderitem
-- Access: Private
-- Description: Creates a new order item.
-- Body Parameters:
-- orderId: string (Required)
-- productId: string (Required)
-- quantity: integer (Required)
-- price: float (Required)
+    - Method: POST
+    - Endpoint: /orderitem
+    - Access: Private
+    - Description: Creates a new order item.
+    - Body Parameters:
+    - orderId: string (Required)
+    - productId: string (Required)
+    - quantity: integer (Required)
+    - price: float (Required)
 
 ## Delete an Order Item ##
 
-- Method: DELETE
-- Endpoint: /orderitem/:id
-- Access: Admin Only
-- Description: Deletes a specific order item.
+    - Method: DELETE
+    - Endpoint: /orderitem/:id
+    - Access: Admin Only
+    - Description: Deletes a specific order item.
 
 
 ## Cart ##
 
 ## Get User Cart ##
 
-- Method: GET
-- Endpoint: /cart
-- Access: Private
-- Description: Retrieves the user's cart items.
+    - Method: GET
+    - Endpoint: /cart
+    - Access: Private
+    - Description: Retrieves the user's cart items.
 
 ## Add Item to Cart ##
 
-- Method: POST
-- Endpoint: /cart
-- Access: Private
-- Description: Adds an item to the user's cart.
-- Body Parameters:
-- productId: string (Required)
-- quantity: integer (Required)
+    - Method: POST
+    - Endpoint: /cart
+    - Access: Private
+    - Description: Adds an item to the user's cart.
+    - Body Parameters:
+    - productId: string (Required)
+    - quantity: integer (Required)
 
 ## Update Cart Item ##
 
-- Method: PUT
-- Endpoint: /cart/:cartId
-- Access: Private
-- Description: Modifies the quantity of an item in the cart.
-- Path Parameters:
-- cartId: string (Cart Item ID)
-- Body Parameters:
-- quantity: integer (Optional)
+    - Method: PUT
+    - Endpoint: /cart/:cartId
+    - Access: Private
+    - Description: Modifies the quantity of an item in the cart.
+    - Path Parameters:
+    - cartId: string (Cart Item ID)
+    - Body Parameters:
+    - quantity: integer (Optional)
 
 ## Remove Item from Cart ##
 
-- Method: DELETE
-- Endpoint: /cart/:cartId
-- Access: Private
-- Description: Deletes an item from the cart.
-- Path Parameters:
-- cartId: string (Cart Item ID)
+    - Method: DELETE
+    - Endpoint: /cart/:cartId
+    - Access: Private
+    - Description: Deletes an item from the cart.
+    - Path Parameters:
+    - cartId: string (Cart Item ID)
 
 ## Clear User Cart ##
 
-- Method: DELETE
-- Endpoint: /cart/clear
-- Access: Private
-- Description: Clears all items from the user’s cart.
+    - Method: DELETE
+    - Endpoint: /cart/clear
+    - Access: Private
+    - Description: Clears all items from the user’s cart.
 
 
 ## Contributing

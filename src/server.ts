@@ -14,7 +14,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
 app.get('/', (req, res,) => {
-  res.json('hahaha')
+  res.json('Welcom')
 })
 
 app.use( protect, router)

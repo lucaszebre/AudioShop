@@ -1,6 +1,6 @@
 import {Router} from 'express'
 import { body, oneOf, validationResult } from "express-validator"
-import { createProduct, deleteProduct, getOneProduct, getProducts, updateProduct } from './handlers/product'
+import { createProduct, deleteProduct, updateProduct } from './handlers/product'
 import { createOrder, deleteOrder, getOneOrder, getOrders, updateOrder } from './handlers/order'
 import { createReview, deleteReview, getOneReview, getReviews } from './handlers/review'
 import { createOrderItem , deleteOrderItem, getOneOrderItem,getOrderItems } from './handlers/orderItem'

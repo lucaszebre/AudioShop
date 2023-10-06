@@ -18,8 +18,8 @@ app.get('/', (req, res,) => {
 
 app.use( protect, router)
 
-app.post('/user', createNewUser)
-app.post('/signin', signin)
+app.post('/register', createNewUser)
+app.post('/login', signin)
 
 app.use((err, req, res, next) => {
   console.log(err)

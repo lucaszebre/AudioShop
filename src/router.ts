@@ -5,11 +5,18 @@ import { createOrder, deleteOrder, getOneOrder, getOrders, updateOrder } from '.
 import { createReview, deleteReview, getOneReview, getReviews } from './handlers/review'
 import { createOrderItem , deleteOrderItem, getOneOrderItem,getOrderItems } from './handlers/orderItem'
 import { handleInputErrors } from './modules/middleware'
-
+import {
+  addItemToCart,
+  getUserCart,
+  updateCartItem,
+  removeItemFromCart,
+  clearUserCart
+  // Ensure these handlers are implemented and exported in your `./handlers/cart` file
+} from './handlers/cart';
 const router = Router()
 
 /**
- * Product
+ * Product working
  */
 router.get('/product', getProducts)
 router.get('/product/:id', getOneProduct)
@@ -18,7 +25,7 @@ router.post('/product', body('name').isString(),body('description').isString(),b
 router.delete('/product/:id', deleteProduct)
 
 /**
- * Order
+ * Order working
  */
 
 router.get('/order', getOrders)
@@ -49,7 +56,7 @@ router.post('/orderitem',
 router.delete('/orderitem/:id', deleteOrderItem);
 
 /**
- * Review
+ * Review working
  */
 router.get('/review', getReviews);
 router.get('/review/:id', getOneReview);
@@ -60,5 +67,24 @@ router.post('/review',
   createReview
 );
 router.delete('/review/:id', deleteReview);
+
+
+/**
+ * Cart
+ */
+router.get('/cart/:userId', getUserCart);
+router.post('/cart',
+  body('userId').isString(),
+  body('productId').isString(),
+  body('quantity').isInt(), handleInputErrors,
+  addItemToCart
+);
+router.put('/cart/:cartId',
+  body('quantity').isInt().optional(), handleInputErrors,
+  updateCartItem
+);
+router.delete('/cart/:cartId', removeItemFromCart);
+router.delete('/cart/clear/:userId', clearUserCart);
+
 
 export default router;

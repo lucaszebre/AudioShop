@@ -3,9 +3,10 @@
 The E-Commerce API is developed using **Express.js** and **Node.js** and **PostgreSql** and **Prisma** . It provides comprehensive functionalities for handling products, orders, reviews, order items, and user shopping carts within an e-commerce platform.
 
 ## Features
-- Register , Login 
-- CRUD cart , product , orders , reviews etc...
-- role customer , admin 
+- ## Products
+- ## Order
+- ## Review
+- ## Cart
 
 ## API Endpoints
 

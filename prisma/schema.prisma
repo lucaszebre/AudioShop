@@ -13,66 +13,61 @@ datasource db {
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-
-
 model User {
-  id          String      @id @default(uuid())
+  id          String   @id @default(uuid())
   password    String
-  email       String    @unique
-  role        String    @default("customer")
+  email       String   @unique
+  role        String   @default("customer")
   firstName   String
   lastName    String
   address     String
   phoneNumber String
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
   orders      Order[]
   reviews     Review[]
-  cart  Cart[]
+  cart        Cart[]
 }
 
 model Cart {
-  id        String      @id @default(uuid())
+  id        String  @id @default(uuid())
   userId    String
-  user      User     @relation(fields: [userId], references: [id])
+  user      User    @relation(fields: [userId], references: [id])
   productId String
-  product   Product  @relation(fields: [productId], references: [id])
+  product   Product @relation(fields: [productId], references: [id])
   quantity  Int
 }
 
-
 model Product {
-  id          String       @id @default(uuid())
+  id          String      @id @default(uuid())
   name        String
-  img         String
-  imgTablet  String
-  imgMobile   String
-  description String
+  img         String     @default("")
+  imgTablet   String     @default("")
+  imgMobile   String     @default("")
+  description String     
   price       Float
   stock       Int
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
   orderItems  OrderItem[]
   reviews     Review[]
   cart        Cart[]
 }
 
-
-
 model Order {
-  id            String        @id @default(uuid())
+  id            String      @id @default(uuid())
   userId        String
-  user          User       @relation(fields: [userId], references: [id])
+  user          User        @relation(fields: [userId], references: [id])
   totalPrice    Float
   orderStatus   String
   paymentMethod String
-  createdAt     DateTime   @default(now())
-  updatedAt     DateTime   @updatedAt
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
   orderItems    OrderItem[]
 }
 
 model OrderItem {
-  id        String      @id @default(uuid())
+  id        String   @id @default(uuid())
   orderId   String
   order     Order    @relation(fields: [orderId], references: [id])
   productId String
@@ -84,7 +79,7 @@ model OrderItem {
 }
 
 model Review {
-  id        String      @id @default(uuid())
+  id        String   @id @default(uuid())
   productId String
   product   Product  @relation(fields: [productId], references: [id])
   userId    String

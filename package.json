@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "nodemon src/index.ts",
     "start": "ts-node src/index.ts",
-    "migrate":"npx prisma migrate dev"  },
+    "migrate":"npx prisma migrate dev"
+    },
   "keywords": [],
   "author": "",
   "license": "ISC",

@@ -12,7 +12,9 @@ export const hashPassword = (password) => {
 export const createJWT = (user) => {
   const token = jwt.sign({
       id: user.id,
-      username: user.username
+      firstName:user.firstName,
+      lastName:user.lastName,
+      role:user.role
     }, 
     process.env.JWT_SECRET
   )
@@ -46,4 +48,14 @@ export const protect = (req, res, next) => {
     res.json({message: 'not valid token'})
     return
   }
+}
+
+export const Admin = (req, res, next) => {
+  const role = req.user.role
+  if (role!=="admin") {
+    res.status(401)
+    res.json({message: 'not authorized'})
+    return
+  }
+  next()
 }

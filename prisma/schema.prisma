@@ -19,6 +19,7 @@ model User {
   id          String      @id @default(uuid())
   password    String
   email       String    @unique
+  role        String    @default("customer")
   firstName   String
   lastName    String
   address     String
@@ -43,6 +44,9 @@ model Cart {
 model Product {
   id          String       @id @default(uuid())
   name        String
+  img         String
+  imgTablet  String
+  imgMobile   String
   description String
   price       Float
   stock       Int

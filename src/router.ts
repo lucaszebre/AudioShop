@@ -13,16 +13,16 @@ import {
   clearUserCart
   // Ensure these handlers are implemented and exported in your `./handlers/cart` file
 } from './handlers/cart';
+import { Admin } from './modules/auth'
+
 const router = Router()
 
 /**
  * Product working
  */
-router.get('/product', getProducts)
-router.get('/product/:id', getOneProduct)
-router.put('/product/:id', body('name').isString(),body('description').isString(),body('price').isFloat(),body('stock').isInt(), handleInputErrors, updateProduct)
-router.post('/product', body('name').isString(),body('description').isString(),body('price').isFloat(),body('stock').isInt(), handleInputErrors, createProduct)
-router.delete('/product/:id', deleteProduct)
+router.put('/product/:id',Admin, body('name').isString(),body('description').isString(),body('price').isFloat(),body('stock').isInt(), handleInputErrors, updateProduct)
+router.post('/product',Admin, body('name').isString(),body('description').isString(),body('price').isFloat(),body('stock').isInt(), handleInputErrors, createProduct)
+router.delete('/product/:id',Admin, deleteProduct)
 
 /**
  * Order working
@@ -40,7 +40,7 @@ router.post('/order',
   body('method').exists().isString(), handleInputErrors,
   createOrder
 )
-router.delete('/order/:id', deleteOrder)
+router.delete('/order/:id',Admin, deleteOrder)
 /*
 * OrderItem
  */
@@ -53,7 +53,7 @@ router.post('/orderitem',
   body('price').isFloat(), handleInputErrors,
   createOrderItem
 );
-router.delete('/orderitem/:id', deleteOrderItem);
+router.delete('/orderitem/:id',Admin, deleteOrderItem);
 
 /**
  * Review working
@@ -66,7 +66,7 @@ router.post('/review',
   body('text').isString(),handleInputErrors,
   createReview
 );
-router.delete('/review/:id', deleteReview);
+router.delete('/review/:id',Admin, deleteReview);
 
 
 /**

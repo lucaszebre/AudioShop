@@ -4,6 +4,7 @@ import morgan from 'morgan'
 import cors from 'cors'
 import { protect } from './modules/auth'
 import { createNewUser, signin } from './handlers/user'
+import { getProducts,getOneProduct } from './handlers/product'
 
 const app = express()
 
@@ -17,7 +18,8 @@ app.get('/', (req, res,) => {
 })
 
 app.use( protect, router)
-
+router.get('/product', getProducts)
+router.get('/product/:id', getOneProduct)
 app.post('/register', createNewUser)
 app.post('/login', signin)
 

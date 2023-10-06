@@ -24,15 +24,13 @@ router.delete('/product/:id', deleteProduct)
 router.get('/order', getOrders)
 router.get('/order/:id', getOneOrder)
 router.put('/order/:id', 
-  body('userId').isString(),
-  body('totalPrice').optional(),
+  body('price').optional(),
   body('orderStatus').optional(),
-  body('paymentMethod').optional(), handleInputErrors,updateOrder)
+  body('method').optional(), handleInputErrors,updateOrder)
 router.post('/order',
-  body('userId').exists().isString(),
-  body('totalPrice').exists().isFloat(),
+  body('price').exists().isFloat(),
   body('orderStatus').exists().isString(),
-  body('paymentMethod').exists().isString(), handleInputErrors,
+  body('method').exists().isString(), handleInputErrors,
   createOrder
 )
 router.delete('/order/:id', deleteOrder)
@@ -57,7 +55,6 @@ router.get('/review', getReviews);
 router.get('/review/:id', getOneReview);
 router.post('/review', 
   body('productId').isString(),
-  body('userId').isString(),
   body('rating').isInt(),
   body('text').isString(),handleInputErrors,
   createReview

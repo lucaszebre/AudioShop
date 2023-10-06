@@ -1,13 +1,29 @@
 import prisma  from "../db"
 
     export const getOneReview= async (req, res) => {
-    const review = await prisma.review.findUnique({
-        where: {
-        id: req.params.id
-        }
-    })
+        try {
 
-    res.json({data: review})
+            if(req.params.id){
+                console.log(req.params.id)
+                const review = await prisma.review.findUnique({
+                    where: {
+                    id: req.params.id
+                    }
+                })
+                if (!review) {
+                  return res.status(404).json({ error: 'Order not found' });
+                }else{
+                  res.json({data: review})
+          
+                }
+              }else{
+                return res.status(404).json({ error: 'Need an id' });
+              }
+
+        } catch (error) {
+        res.status(500).json({ error: 'Server error' });
+        }
+   
     }
 
     export const getReviews = async (req, res) => {
@@ -30,30 +46,53 @@ try {
     
     const newreview = await prisma.review.create({
             data: {
-            rating: rating,
-            text: text,
-            user: { connect: { id: userId } },
-            product: { connect: { id: productId } }
-            }
-        });
+            rating,
+            text,
+            userId ,
+            productId } }
+            
+        );
     
-        res.json({ data: newreview });
-        } catch (error) {
+        res.json({  newreview });
+        }
+        catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Server error' });
         }
     };
 
     export const updateReview = async (req, res) => {
-    
-    const updatedUpdate = await prisma.review.update({
-        where: {
-        id: req.params.id
-        },
-        data: req.body
-    })
+        try {
+            if(req.params.id){
+                console.log(req.params.id)
+                const review = await prisma.review.findUnique({
+                    where: {
+                    id: req.params.id
+                    }
+                })
+                if (!review) {
+                  return res.status(404).json({ error: 'Order not found' });
+                }else{
+                    const updatedUpdate = await prisma.review.update({
+                        where: {
+                        id: req.params.id
+                        },
+                        data: req.body
+                    })
+                
+                    res.json({data: updatedUpdate})
+          
+                }
+              }else{
+                return res.status(404).json({ error: 'Need an id' });
+              }
 
-    res.json({data: updatedUpdate})
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: 'Server error' });
+        }
+    
+    
     }
 
     export const deleteReview = async (req, res) => {

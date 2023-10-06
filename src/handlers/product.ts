@@ -25,7 +25,6 @@ export const getOneProduct = async (req, res) => {
 // Create one
 export const createProduct = async (req, res) => {
   const { name, description,price,stock } = req.body;
-  if (!name || !description) return res.status(400).send('Invalid input');
   
   try {
     const product = await prisma.product.create({

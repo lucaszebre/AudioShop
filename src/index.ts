@@ -1,8 +1,10 @@
-import * as dotenv from 'dotenv'
-dotenv.config()
+import * as dotenv from 'dotenv';
+dotenv.config();
 
-import app from './server'
+import app from './server';
 
-app.listen(4000, () => {
-  console.log('Welcome to my E-com API')
-})
+const PORT = process.env.PORT || 3000; // Adding a fallback value in case the PORT variable is not set
+
+app.listen(PORT, () => {
+  console.log(`Welcome to my E-com API, listening on port ${PORT}`);
+});

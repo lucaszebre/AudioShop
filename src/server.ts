@@ -14,11 +14,10 @@ app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
 
-
+app.use(routerer)
 app.use( protect, router)
 // app.post('/register', createNewUser)
 // app.post('/login', signin)
-app.use(routerer)
 app.use((err, req, res, next) => {
   console.log(err)
   res.json({message: `had an error: ${err.message}`})

@@ -50,12 +50,3 @@ export const protect = (req, res, next) => {
   }
 }
 
-export const Admin = (req, res, next) => {
-  const role = req.user.role
-  if (role!=="admin") {
-    res.status(401)
-    res.json({message: 'not authorized'})
-    return
-  }
-  next()
-}

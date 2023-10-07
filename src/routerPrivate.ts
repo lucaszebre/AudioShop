@@ -13,7 +13,7 @@ import {
   clearUserCart
   // Ensure these handlers are implemented and exported in your `./handlers/cart` file
 } from './handlers/cart';
-import { Admin } from './modules/auth'
+import { Admin } from './modules/middleware'
 
 const router = Router()
 

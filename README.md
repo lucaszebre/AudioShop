@@ -55,7 +55,7 @@ The E-Commerce API is developed using **Express.js** and **Node.js** and **Postg
 
 ## Orders ##
 
-- **Get All Orders****
+- **Get All Orders***
 
     - Method: GET
     - Endpoint: /order

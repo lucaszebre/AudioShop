@@ -1,224 +1,71 @@
-# E-Commerce RESTful API Documentation
+# AudioShop API
 
-The E-Commerce API is developed using **Express.js** and **Node.js** and **PostgreSql** and **Prisma** . It provides comprehensive functionalities for handling products, orders, reviews, order items, and user shopping carts within an e-commerce platform.
+REST API for a small audio-gear e-commerce store: users, products, cart, orders, order items and reviews, with customer and admin roles.
 
-## Features
-- Register , Login 
-- CRUD cart , product , orders , reviews etc...
-- role customer , admin 
+## What it does
 
-## API Endpoints
+- Register and log in with email and password (bcrypt hashes, JWT bearer tokens)
+- Public product catalogue; admins create, update and delete products
+- Per-user shopping cart (add, update quantity, remove, clear)
+- Orders and order items for authenticated users; admin-only deletes
+- Product reviews with a rating and text
+- Request validation with express-validator
+- Experimental Stripe payment-intent routes
 
-## Products ##
+## Stack
 
-- **Get All Products**
+- Node.js, TypeScript, Express 4
+- Prisma 4 with PostgreSQL
+- bcrypt, jsonwebtoken, express-validator, cors, morgan, dotenv
+- Stripe Node SDK
+- ts-node and nodemon for running the server
 
-    - Method: GET
-    - Endpoint: /product
-    - Access: Public
-    - Description: Retrieves all products.
+## Run locally
 
-- **Create a Product**
+Requires Node.js and a PostgreSQL database.
 
-    - Method: POST
-    - Endpoint: /product
-    -  Access: Admin Only
-    - Description: Adds a new product.
-    - Body Parameters:
-    - name: string (Required)
-    - description: string (Required)
-    - price: float (Required)
-    - stock: integer (Required)
+```bash
+npm ci
+cp .env.example .env        # then fill in the values
+npx prisma migrate deploy   # create the tables
+npx prisma generate         # generate the Prisma client
+npm run dev                 # nodemon + ts-node, or: npm start
+```
 
-- **Update a Product**
+Environment variables (see `.env.example`): `DATABASE_URL`, `JWT_SECRET`, `PORT`, `STRIPE_SECRET_KEY`, `STRIPE_PUBLISHABLE_KEY`.
 
-    - Method: PUT
-    - Endpoint: /product/:id
-    - Access: Admin Only
-    - Description: Modifies a specific product.
-    - Path Parameters:
-    - id: string (Product ID)
-    - Body Parameters:
-    - name: string (Optional)
-    - description: string (Optional)
-    - price: float (Optional)
-    - stock: integer (Optional)
+New accounts get the `customer` role. To make an admin, set `role` to `admin` on the user's row in the `User` table.
 
-- **Delete a Product**
+## Endpoints
 
-    - Method: DELETE
-    - Endpoint: /product/:id
-    - Access: Admin Only
-    - Description: Removes a specific product.
-    - Path Parameters:
-    - id: string (Product ID)
+Routes are mounted at the root (there is no `/api` prefix). Everything except the public routes needs an `Authorization: Bearer <token>` header.
 
-## Orders ##
+| Method | Path | Access |
+| --- | --- | --- |
+| POST | `/register`, `/login` | Public |
+| GET | `/product`, `/product/:id` | Public |
+| POST | `/product` | Admin |
+| PUT, DELETE | `/product/:id` | Admin |
+| GET, POST | `/order` | Authenticated |
+| GET, PUT | `/order/:id` | Authenticated |
+| DELETE | `/order/:id` | Admin |
+| GET, POST | `/orderitem` | Authenticated |
+| GET | `/orderitem/:id` | Authenticated |
+| DELETE | `/orderitem/:id` | Admin |
+| GET, POST | `/review` | Authenticated |
+| GET | `/review/:id` | Authenticated |
+| DELETE | `/review/:id` | Admin |
+| GET, POST | `/cart` | Authenticated |
+| PUT, DELETE | `/cart/:cartId` | Authenticated |
 
-- **Get All Orders***
+Example:
 
-    - Method: GET
-    - Endpoint: /order
-    - Access: Public/Private
-    - Description: Retrieves all orders.
+```bash
+curl -X POST localhost:3000/register -H 'content-type: application/json' \
+  -d '{"email":"me@example.com","password":"secret","firstName":"Ada","lastName":"L","address":"1 Main St","phoneNumber":"000"}'
+curl localhost:3000/product
+```
 
-- **Get One Order**
+## Status
 
-    - Method: GET
-    - Endpoint: /order/:id
-    - Access: Public/Private
-    - Description: Retrieves details of a specific order by its id.
-
-- **Create an Order**
-
-    - Method: POST
-    - Endpoint: /order
-    - Access: Private
-    - Description: Creates a new order.
-    - Body Parameters:
-    - price: float (Required)
-    - orderStatus: string (Required)
-    - method: string (Required)
-
-- **Update an Order**
-
-    - Method: PUT
-    - Endpoint: /order/:id
-    - Access: Private
-    - Description: Updates a specific order.
-    - Body Parameters:
-    - price: float (Optional)
-    - orderStatus: string (Optional)
-    - method: string (Optional)
-
-- **Delete an Order**
-
-    - Method: DELETE
-    - Endpoint: /order/:id
-    - Access: Admin Only
-    - Description: Deletes a specific order.
-    Reviews
-
-## Review
-
-- **Get All Reviews**
-
-    - Method: GET
-    - Endpoint: /review
-    - Access: Public
-    - Description: Retrieves all reviews.
-
-- **Get One Review**
-
-    - Method: GET
-    - Endpoint: /review/:id
-    - Access: Public
-    - Description: Retrieves a specific review by its id.
-
-- **Create a Review**
-
-    - Method: POST
-    - Endpoint: /review
-    - Access: Private
-    - Description: Creates a new review.
-    - Body Parameters:
-    - productId: string (Required)
-    - rating: integer (Required)
-    - text: string (Required)
-
-- **Delete a Review**
-
-    - Method: DELETE
-    - Endpoint: /review/:id
-    - Access: Admin Only
-    - Description: Deletes a specific review.
-    Order Items
-
-## Items
-
-- **Get All Order Items**
-
-    - Method: GET
-    - Endpoint: /orderitem
-    - Access: Public/Private
-    - Description: Retrieves all order items.
-
-- **Get One Order Item**
-
-    - Method: GET
-    - Endpoint: /orderitem/:id
-    - Access: Public/Private
-    - Description: Retrieves a specific order item by its id.
-
-- **Create an Order Item**
-
-    - Method: POST
-    - Endpoint: /orderitem
-    - Access: Private
-    - Description: Creates a new order item.
-    - Body Parameters:
-    - orderId: string (Required)
-    - productId: string (Required)
-    - quantity: integer (Required)
-    - price: float (Required)
-
-- **Delete an Order Item**
-
-    - Method: DELETE
-    - Endpoint: /orderitem/:id
-    - Access: Admin Only
-    - Description: Deletes a specific order item.
-
-
-## Cart ##
-
-- **Get User Cart**
-
-    - Method: GET
-    - Endpoint: /cart
-    - Access: Private
-    - Description: Retrieves the user's cart items.
-
-- **Add Item to Cart**
-
-    - Method: POST
-    - Endpoint: /cart
-    - Access: Private
-    - Description: Adds an item to the user's cart.
-    - Body Parameters:
-    - productId: string (Required)
-    - quantity: integer (Required)
-
-- **Update Cart Item**
-
-    - Method: PUT
-    - Endpoint: /cart/:cartId
-    - Access: Private
-    - Description: Modifies the quantity of an item in the cart.
-    - Path Parameters:
-    - cartId: string (Cart Item ID)
-    - Body Parameters:
-    - quantity: integer (Optional)
-
-- **Remove Item from Cart**
-
-    - Method: DELETE
-    - Endpoint: /cart/:cartId
-    - Access: Private
-    - Description: Deletes an item from the cart.
-    - Path Parameters:
-    - cartId: string (Cart Item ID)
-
-- **Clear User Cart**
-
-    - Method: DELETE
-    - Endpoint: /cart/clear
-    - Access: Private
-    - Description: Clears all items from the user’s cart.
-
-
-## Contributing
-To contribute to the project, kindly fork the repository and open a pull request. For inquiries or discussions about development, contact me on [Twitter](https://twitter.com/YourTwitterHandle).
-
-## Security Vulnerabilities
-Should you identify any security vulnerabilities within the project, please report them by creating an issue. Your contributions towards securing the application are greatly appreciated.
+Built in 2023 as a learning project; not actively maintained.

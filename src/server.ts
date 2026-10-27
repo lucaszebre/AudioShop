@@ -12,6 +12,14 @@ app.use(morgan('dev'))
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
+// Public landing route so the demo URL doesn't answer with a 401
+app.get('/', (req, res) => {
+  res.json({
+    name: 'AudioShop API',
+    endpoints: ['POST /register', 'POST /login', 'GET /product', 'GET /product/:id'],
+  })
+})
+
 app.use(routerer)
 app.use( protect, router)
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
